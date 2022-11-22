@@ -5,7 +5,7 @@ const db = require('cyclic-dynamodb')
 
 app.use(express.json())
 app.use(express.urlencoded({ extended: true }))
-app.use(cors());
+app.use(cors({origin:'http://localhost:3002'}));
 
 // #############################################################################
 // This configures static hosting for files in /public that have the extensions
@@ -81,7 +81,7 @@ app.get('/:col/:key/:fragment', async (req, res) => {
 
 
 // Get a full listing
-app.get('/:col', cors(),async (req, res) => {
+app.get('/:col', async (req, res) => {
   const col = req.params.col
   console.log(`list collection: ${col} with params: ${JSON.stringify(req.params)}`)
   const items = await db.collection(col).list()
