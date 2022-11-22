@@ -81,7 +81,7 @@ app.get('/:col/:key/:fragment', async (req, res) => {
 
 
 // Get a full listing
-app.get('/:col', async (req, res) => {
+app.get('/:col', cors(),async (req, res) => {
   const col = req.params.col
   console.log(`list collection: ${col} with params: ${JSON.stringify(req.params)}`)
   const items = await db.collection(col).list()
