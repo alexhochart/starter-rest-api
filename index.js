@@ -6,10 +6,12 @@ const db = require('cyclic-dynamodb')
 app.use(express.json())
 app.use(express.urlencoded({ extended: true }))
 app.use(cors({
-  origin:'http://http://127.0.0.1'
+  origin:'*', 
+  credentials:true,            //access-control-allow-credentials:true
+  optionSuccessStatus:200,
 }));
 
-// #############################################################################
+// ##############################################################################
 // This configures static hosting for files in /public that have the extensions
 // listed in the array.
 // var options = {
