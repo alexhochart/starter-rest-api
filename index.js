@@ -31,6 +31,19 @@ app.post('/:col/:key', async (req, res) => {
   res.json(item).end()
 })
 
+// Create or Update a fragment item
+app.post('/:col/:key/:fragment', async (req, res) => {
+  const col = req.params.col
+  const key = req.params.key
+  const fragment = req.params.fragment
+  console.log(req.body)
+
+  console.log(`from collection: ${col} delete key: ${key} with params ${JSON.stringify(req.params)}`)
+  const item = await db.collection(col).item(key).fragment(fragment).set(req.body)
+  console.log(JSON.stringify(item, null, 2))
+  res.json(item).end()
+})
+
 // Delete an item
 app.delete('/:col/:key', async (req, res) => {
   const col = req.params.col
