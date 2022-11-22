@@ -8,13 +8,7 @@ app.use(express.urlencoded({ extended: true }))
 
 var whitelist = ['http://127.0.0.1:3002', 'http://localhost:3002']
 app.use(cors({
-  origin: function (origin, callback) {
-    if (whitelist.indexOf(origin) !== -1) {
-      callback(null, true)
-    } else {
-      callback(new Error('Not allowed by CORS origin:'+origin))
-    }
-  },
+  origin: 'http://127.0.0.1:3002',
   credentials:true,            //access-control-allow-credentials:true
   optionSuccessStatus:200
 }));
