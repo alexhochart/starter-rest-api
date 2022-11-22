@@ -45,12 +45,25 @@ app.delete('/:col/:key', async (req, res) => {
 app.get('/:col/:key', async (req, res) => {
   const col = req.params.col
   const key = req.params.key
-  const itemcrea = await db.collection(col).set(key, "robbie")
+  //const itemcrea = await db.collection(col).set(key, "robbie")
   console.log(`from collection: ${col} get key: ${key} with params ${JSON.stringify(req.params)}`)
   const item = await db.collection(col).get(key)
   console.log(JSON.stringify(item, null, 2))
   res.json(item).end()
 })
+
+// Get a single fragmented item
+app.get('/:col/:key/:fragment', async (req, res) => {
+  const col = req.params.col
+  const key = req.params.key
+  const fragment = req.params.fragment
+  let portfolio = db.collection(col)
+  const item = await portfolio.item(key).fragment(fragment).get()
+  console.log(JSON.stringify(item, null, 2))
+  res.json(item).end()
+})
+
+
 
 // Get a full listing
 app.get('/:col', async (req, res) => {
